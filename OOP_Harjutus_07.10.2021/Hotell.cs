@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace OOP_Harjutus_07._10._2021
 {
-    class Hotell:MajutusAsutus
+    public class Hotell : MajutusAsutus
     {
-        int _tubadearv;
-        public Hotell(decimal hind, int kohti_toas) : base(hind, kohti_toas) {
-            _tubadearv = 100;
+        private int _tubadearv;
+        private int _kohtitoas;
+        public Hotell(decimal hind, int kohtiToas, int tubadeArv) : base(hind, tubadeArv*kohtiToas) {
+            _kohtitoas = kohtiToas;
+            _tubadearv = tubadeArv;
         }
 
         public override int Reserveeri(int külalisi)
@@ -23,8 +25,15 @@ namespace OOP_Harjutus_07._10._2021
             {
                 throw new ArgumentOutOfRangeException(nameof(külalisi), "Ei tohi olla negatiivne arv");
             }
+            int tubeVaja = (int)Math.Ceiling((double)külalisi / _kohtitoas);
             VabuTube -= külalisi;
             return VabuTube;
+        }
+
+        public override int VabuKohti
+        {
+            get => VabuTube * _kohtitoas;
+            set { VabuTube = (int)Math.Ceiling((double)value / _kohtitoas); }
         }
 
         public int VabuTube

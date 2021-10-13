@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace OOP_Harjutus_07._10._2021
 {
-    class MajutusAsutus
+    public class MajutusAsutus
     {
-        private decimal _hind;
-        private int _kohti;
-        private int _vabukohti;
+        protected decimal _hind;
+        protected int _kohti;
+        protected int _vabukohti;
 
         public MajutusAsutus(decimal hind, int kohti)
         {
@@ -33,10 +33,15 @@ namespace OOP_Harjutus_07._10._2021
             return 1;
         }
 
-        public int VabuKohti
+        public virtual int VabuKohti
         {
             get { return _vabukohti; }
             set { _vabukohti = value; }
+        }
+
+        public override string ToString()
+        {
+            return $"Majutusasutus\nHind: {_hind}\nKohti/Vaba: {_kohti}/{VabuKohti}";
         }
 
     }
